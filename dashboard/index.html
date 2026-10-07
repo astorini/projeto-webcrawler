@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Livros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="topo">
+        <div class="container topo-conteudo">
+            <div>
+                <h1>Dashboard de Livros</h1>
+                <p>Dados coletados do site books.toscrape.com</p>
+            </div>
+            <span class="ultima-coleta" id="ultima-coleta"></span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="filtros">
+            <input type="text" id="busca" placeholder="Pesquisar título...">
+            <select id="categoria">
+                <option value="">Todas as categorias</option>
+            </select>
+            <select id="nota">
+                <option value="">Qualquer nota</option>
+                <option value="3">3 estrelas ou mais</option>
+                <option value="4">4 estrelas ou mais</option>
+                <option value="5">5 estrelas</option>
+            </select>
+            <input type="number" id="preco-min" placeholder="Preço mín. (£)">
+            <input type="number" id="preco-max" placeholder="Preço máx. (£)">
+            <button onclick="filtrar()">Filtrar</button>
+            <button onclick="limparFiltros()" class="botao-secundario">Limpar</button>
+        </section>
+
+        <section class="cards">
+            <div class="card azul">
+                <p>Total de livros</p>
+                <h2 id="total-livros">0</h2>
+            </div>
+            <div class="card verde">
+                <p>Preço médio</p>
+                <h2 id="preco-medio">£0</h2>
+            </div>
+            <div class="card laranja">
+                <p>Nota média</p>
+                <h2 id="nota-media">0</h2>
+            </div>
+            <div class="card roxo">
+                <p>Em estoque</p>
+                <h2 id="em-estoque">0%</h2>
+            </div>
+            <div class="card vermelho">
+                <p>Categorias</p>
+                <h2 id="total-categorias">0</h2>
+            </div>
+        </section>
+
+        <section class="graficos">
+            <div class="caixa">
+                <h3>Top 10 categorias com mais livros</h3>
+                <div class="area-grafico"><canvas id="grafico-categorias"></canvas></div>
+            </div>
+            <div class="caixa">
+                <h3>Quantidade de livros por nota</h3>
+                <div class="area-grafico"><canvas id="grafico-notas"></canvas></div>
+            </div>
+            <div class="caixa">
+                <h3>Livros por faixa de preço</h3>
+                <div class="area-grafico"><canvas id="grafico-precos"></canvas></div>
+            </div>
+        </section>
+
+        <section class="caixa">
+            <h3>Livros coletados</h3>
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Título</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Nota</th>
+                            <th>Estoque</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-livros"></tbody>
+                </table>
+            </div>
+            <div class="paginacao">
+                <button onclick="paginaAnterior()" class="botao-secundario">‹ Anterior</button>
+                <span id="info-pagina"></span>
+                <button onclick="proximaPagina()" class="botao-secundario">Próxima ›</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>Projeto Web Crawler · Python, MongoDB, FastAPI e Chart.js</footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
